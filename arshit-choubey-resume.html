@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Arshit Choubey — DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #09090f;
+    --surface:   #0f0f1a;
+    --card:      #13131f;
+    --border:    #1e1e32;
+    --accent:    #7c6bff;
+    --accent2:   #00d4aa;
+    --accent3:   #ff6b6b;
+    --gold:      #f0c040;
+    --text:      #e8e8f0;
+    --muted:     #6b6b8a;
+    --subtle:    #2a2a42;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND GRID ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── GLOW ORBS ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+  }
+  .orb-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -100px; }
+  .orb-2 { width: 400px; height: 400px; background: var(--accent2); bottom: -80px; right: -80px; }
+
+  /* ── WRAPPER ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 32px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .header-left { display: flex; flex-direction: column; gap: 10px; }
+
+  .name-block {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .title-pill {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    margin-top: 4px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .contact-item:hover { color: var(--accent2); }
+  .contact-item svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.7; }
+  .contact-item a { color: inherit; text-decoration: none; }
+
+  /* Availability badge */
+  .avail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 212, 170, 0.08);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+  .avail-dot {
+    width: 7px; height: 7px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,170,0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(0,212,170,0); }
+  }
+
+  /* ── SUMMARY ── */
+  .summary-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-bottom: 44px;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #c8c8e0;
+    animation: fadeUp 0.6s 0.1s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-block::before {
+    content: '{ }';
+    position: absolute;
+    right: 20px; top: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 28px;
+    color: var(--subtle);
+    letter-spacing: -4px;
+  }
+  .summary-block strong { color: var(--accent2); font-weight: 500; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.3s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+  }
+
+  /* ── EXPERIENCE CARD ── */
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .exp-card:hover {
+    border-color: var(--subtle);
+    transform: translateY(-2px);
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+  }
+  .exp-card.current::before { background: var(--accent2); }
+  .exp-card.past::before    { background: var(--accent); }
+  .exp-card.older::before   { background: var(--muted); }
+
+  .exp-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 3px;
+  }
+  .exp-date .current-badge {
+    background: rgba(0,212,170,0.12);
+    color: var(--accent2);
+    border: 1px solid rgba(0,212,170,0.25);
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    margin-left: 6px;
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .exp-company span {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    margin-left: 8px;
+  }
+
+  .exp-bullets {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .exp-bullets li {
+    list-style: none;
+    padding-left: 18px;
+    position: relative;
+    font-size: 13px;
+    color: #b8b8d0;
+    line-height: 1.65;
+  }
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 3px;
+  }
+  .exp-bullets li strong { color: var(--accent2); font-weight: 500; }
+
+  /* AI subsection */
+  .ai-subsection {
+    margin-top: 16px;
+    background: rgba(124, 107, 255, 0.05);
+    border: 1px solid rgba(124,107,255,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .ai-subsection-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: var(--subtle); }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .skill-group-title::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--accent2);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: #a0a0c0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .tag:hover {
+    background: rgba(124,107,255,0.1);
+    border-color: rgba(124,107,255,0.3);
+    color: var(--accent);
+  }
+  .tag.hot {
+    background: rgba(0,212,170,0.06);
+    border-color: rgba(0,212,170,0.2);
+    color: var(--accent2);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    transition: border-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: var(--subtle);
+    transform: translateY(-3px);
+  }
+  .project-card.featured {
+    border-color: rgba(124,107,255,0.3);
+    grid-column: 1 / -1;
+  }
+  .project-card.featured::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,107,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .project-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-new {
+    background: rgba(240,192,64,0.1);
+    border: 1px solid rgba(240,192,64,0.3);
+    color: var(--gold);
+  }
+  .badge-prod {
+    background: rgba(0,212,170,0.08);
+    border: 1px solid rgba(0,212,170,0.2);
+    color: var(--accent2);
+  }
+
+  .project-desc {
+    font-size: 12.5px;
+    color: #9090b0;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .project-tag {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+  /* ── METRICS ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .metric-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── EDUCATION & CERTS ── */
+  .edu-certs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .edu-item, .cert-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .edu-item:hover, .cert-item:hover { border-color: var(--subtle); }
+
+  .edu-icon, .cert-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .edu-title, .cert-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+
+  .edu-sub, .cert-sub {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 3px;
+  }
+
+  /* ── FOOTER ── */
+  .resume-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+  }
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--accent2); }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--subtle);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff !important; color: #111 !important; }
+    body::before, .orb { display: none !important; }
+    .page { padding: 20px !important; max-width: 100% !important; }
+    h1 { color: #111 !important; -webkit-text-fill-color: #111 !important; }
+    .exp-card, .project-card, .skill-group, .metric-card, .edu-item, .cert-item,
+    .summary-block, .ai-subsection {
+      background: #f8f8f8 !important;
+      border-color: #ddd !important;
+      break-inside: avoid;
+    }
+    .project-card.featured { grid-column: span 1 !important; }
+    .projects-grid { grid-template-columns: 1fr 1fr !important; }
+    .metrics-row { grid-template-columns: repeat(4,1fr) !important; }
+    .section { animation: none !important; }
+    * { color: #222 !important; -webkit-text-fill-color: #222 !important; }
+    h2, .exp-role, .project-name, .edu-title, .cert-title { color: #000 !important; }
+    .exp-company { color: #555 !important; }
+    .avail, .avail-dot, .title-pill { display: none !important; }
+  }
+
+  @media (max-width: 700px) {
+    .page { padding: 24px 16px; }
+    .header { grid-template-columns: 1fr; }
+    .exp-top { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: repeat(2,1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .edu-certs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="page">
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <header class="header">
+    <div class="header-left">
+      <div class="name-block">
+        <h1>Arshit Choubey</h1>
+        <span class="title-pill">DevOps · AIOps · Cloud</span>
+      </div>
+      <div class="subtitle">Cloud Infrastructure · CI/CD Automation · AI-Augmented Ops</div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:arshitchoubey.devops@gmail.com">arshitchoubey.devops@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.13.97.36 1.92.7 2.84a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.62-.62a2 2 0 012.11-.45c.92.34 1.87.57 2.84.7A2 2 0 0122 15.92z"/></svg>
+          +91 6261242640
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bangalore, India
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          <a href="https://github.com/arshitchoubey18" target="_blank">github.com/arshitchoubey18</a>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          <a href="https://arshitchoubey18.github.io/arshit-choubey-portfolio/" target="_blank">Portfolio</a>
+        </div>
+      </div>
+    </div>
+    <div class="avail">
+      <div class="avail-dot"></div>
+      Open to Opportunities
+    </div>
+  </header>
+
+  <!-- ══════════════ METRICS ══════════════ -->
+  <div class="metrics-row">
+    <div class="metric-card">
+      <div class="metric-value">4+</div>
+      <div class="metric-label">Years Experience</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">40%</div>
+      <div class="metric-label">Faster Deploys</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">&lt;8m</div>
+      <div class="metric-label">P2 Incident Diag.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">60%</div>
+      <div class="metric-label">Image Size Cut</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SUMMARY ══════════════ -->
+  <div class="summary-block">
+    DevOps Engineer with <strong>4+ years</strong> of progressive experience in cloud infrastructure, CI/CD automation, and Linux administration. Grew from Junior DevOps at Concentrix, owning production pipelines for Lenovo enterprise, to a full DevOps Engineer at Joules Two Watts handling <strong>Docker, Kubernetes, Jenkins, GitHub Actions, Terraform, Prometheus, and Grafana</strong> end-to-end. Actively integrating <strong>AI/ML capabilities into DevOps workflows</strong> — LLM-assisted log analysis, AI-augmented incident response, and intelligent infrastructure automation via LangChain, AWS Bedrock, and Ollama. Passionate about <strong>self-healing infrastructure</strong> and building systems that scale and recover automatically.
+  </div>
+
+  <!-- ══════════════ EXPERIENCE ══════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2>Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- JOB 1 -->
+    <div class="exp-card current">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">DevOps Engineer</div>
+          <div class="exp-company">Joules Two Watts Business Solutions Pvt. Ltd.<span>· Client: Lenovo</span></div>
+        </div>
+        <div class="exp-date">
+          Jun 2025 – Present
+          <span class="current-badge">● CURRENT</span>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Provision and manage Linux-based cloud infrastructure on <strong>AWS (EC2, IAM, VPC, S3, CloudWatch)</strong> supporting Lenovo enterprise production environments with high availability and security compliance.</li>
+        <li>Build and maintain <strong>CI/CD pipelines</strong> using Jenkins and GitHub Actions — automating build, test, and deployment workflows, reducing deployment time by <strong>40%</strong>.</li>
+        <li>Manage containerised workloads with <strong>Docker and Kubernetes (EKS)</strong>; handle rolling deployments, scaling strategies, and cluster health monitoring across staging and production.</li>
+        <li>Own <strong>P1/P2 incident response</strong> end-to-end: triage, RCA, fix implementation, post-incident reviews, and SLA compliance across enterprise production SLAs.</li>
+        <li>Implement infrastructure monitoring using <strong>Prometheus and Grafana</strong>; configure alerting rules, dashboards, and capacity planning for CPU, memory, disk, and SLIs.</li>
+        <li>Author and maintain <strong>Terraform IaC modules</strong> for repeatable, version-controlled cloud infrastructure provisioning.</li>
+        <li>Manage <strong>GitOps workflows via Argo CD</strong> — declarative cluster state management, automated reconciliation, and full auditability of environment changes.</li>
+        <li>Integrate <strong>Trivy</strong> container image vulnerability scanning into CI pipelines as a DevSecOps security gate before production promotion.</li>
+        <li>Automate operational tasks (health checks, log rotation, service recovery) using <strong>Bash scripts</strong>, eliminating manual toil.</li>
+      </ul>
+
+      <div class="ai-subsection">
+        <div class="ai-subsection-title">⚡ AI-Augmented Responsibilities</div>
+        <ul class="exp-bullets">
+          <li>Leverage <strong>GitHub Copilot</strong> and <strong>Amazon Q Developer</strong> to accelerate pipeline scripting, Terraform module generation, and Dockerfile optimisation.</li>
+          <li>Prototype <strong>LLM-assisted log analysis</strong> using LangChain + OpenAI API to auto-summarise ELK Stack error patterns and generate first-draft RCA reports, reducing manual triage time.</li>
+          <li>Evaluate <strong>AWS Bedrock</strong> for building internal runbook automation agents that query docs, suggest remediation steps, and escalate intelligently based on alert context.</li>
+          <li>Integrate <strong>AI-driven anomaly detection</strong> on Prometheus metrics to surface early warning signals before threshold breaches, improving MTTD.</li>
+          <li>Use <strong>Dynatrace Davis AI / Datadog AI</strong> to auto-correlate metrics, logs, and traces — enabling faster root cause isolation without manual correlation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- JOB 2 -->
+    <div class="exp-card past">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Junior DevOps Engineer</div>
+          <div class="exp-company">Concentrix Services India Pvt. Ltd.<span>· Client: Lenovo</span></div>
+        </div>
+        <div class="exp-date">Mar 2023 – May 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Managed enterprise Linux and Windows infrastructure across networking, system administration, and deployment pipelines.</li>
+        <li>Owned deployment, patching, and upgrade pipelines for enterprise applications across staging and production environments.</li>
+        <li>Performed log analysis using <strong>ELK Stack and Splunk</strong> to diagnose production issues; documented RCA reports for P1/P2 incidents across multi-tier application stacks.</li>
+        <li>Managed full incident lifecycle in <strong>ServiceNow</strong> — logging, prioritisation, escalation, resolution, and SLA compliance — consistently meeting enterprise targets.</li>
+        <li>Identified recurring failure patterns and authored <strong>operational runbooks</strong>, standardising resolution steps and reducing repeat incident volume team-wide.</li>
+        <li>Built foundational DevOps skills in Docker, Jenkins, and AWS alongside production responsibilities.</li>
+      </ul>
+    </div>
+
+    <!-- JOB 3 -->
+    <div class="exp-card older">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">IT Systems Engineer</div>
+          <div class="exp-company">Shivalik Engineering Industries Ltd.</div>
+        </div>
+        <div class="exp-date">Dec 2021 – Dec 2022</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Managed on-premise IT infrastructure including OS installation, configuration, and lifecycle maintenance for servers and workstations.</li>
+        <li>Administered network equipment, user accounts, and enterprise applications; provided hardware/software troubleshooting and vendor support coordination.</li>
+        <li>Maintained IT asset inventory and coordinated hardware replacements and software licensing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════ SKILLS ══════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2>Technical Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud &amp; AWS</div>
+        <div class="skill-tags">
+          <span class="tag">EC2</span><span class="tag">IAM</span><span class="tag">VPC</span>
+          <span class="tag">S3</span><span class="tag">CloudWatch</span><span class="tag">EKS</span>
+          <span class="tag">Security Groups</span><span class="tag">AWS Bedrock</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">CI/CD &amp; Automation</div>
+        <div class="skill-tags">
+          <span class="tag">Jenkins</span><span class="tag">GitHub Actions</span>
+          <span class="tag">Argo CD</span><span class="tag">GitOps</span>
+          <span class="tag">Bash Scripting</span><span class="tag">YAML</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Containers &amp; IaC</div>
+        <div class="skill-tags">
+          <span class="tag">Docker</span><span class="tag">Docker Compose</span>
+          <span class="tag">Kubernetes (EKS)</span><span class="tag">minikube</span>
+          <span class="tag">Terraform</span><span class="tag">Helm</span><span class="tag">Nginx</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Monitoring &amp; Observability</div>
+        <div class="skill-tags">
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span>
+          <span class="tag">ELK Stack</span><span class="tag">Splunk</span>
+          <span class="tag">Alertmanager</span><span class="tag">Loki</span><span class="tag">Promtail</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Linux &amp; SysAdmin</div>
+        <div class="skill-tags">
+          <span class="tag">RHEL</span><span class="tag">Ubuntu</span><span class="tag">Systemd</span>
+          <span class="tag">SSH</span><span class="tag">Log Analysis</span>
+          <span class="tag">Performance Tuning</span><span class="tag">Networking</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI-Augmented DevOps <span style="color:var(--gold);font-size:9px;margin-left:4px;">NEW</span></div>
+        <div class="skill-tags">
+          <span class="tag hot">LangChain</span><span class="tag hot">OpenAI API</span>
+          <span class="tag hot">Ollama (Mistral)</span><span class="tag hot">AWS Bedrock</span>
+          <span class="tag hot">GitHub Copilot</span><span class="tag hot">Amazon Q Dev</span>
+          <span class="tag hot">FastAPI</span><span class="tag hot">Python</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AIOps &amp; Intelligent Ops</div>
+        <div class="skill-tags">
+          <span class="tag hot">Anomaly Detection</span><span class="tag hot">AI Log Analysis</span>
+          <span class="tag hot">Predictive Alerting</span><span class="tag hot">AI-Assisted RCA</span>
+          <span class="tag hot">Self-Healing Automation</span><span class="tag hot">LLM Runbook Agents</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI Platforms &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="tag hot">Dynatrace Davis AI</span><span class="tag hot">Datadog AI</span>
+          <span class="tag hot">Watsonx.ai</span><span class="tag">Discord API</span>
+          <span class="tag">Slack API</span><span class="tag">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">DevOps Practices</div>
+        <div class="skill-tags">
+          <span class="tag">DevSecOps</span><span class="tag">SRE</span>
+          <span class="tag">IaC</span><span class="tag">Agile</span>
+          <span class="tag">ServiceNow ITSM</span><span class="tag">Trivy</span>
+          <span class="tag">Incident Mgmt</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ PROJECTS ══════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">03</span>
+      <h2>Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <div class="project-header">
+          <div class="project-name">🚀 AIOps Self-Healing Kubernetes Platform</div>
+          <span class="project-badge badge-new">NEW · FEATURED</span>
+        </div>
+        <div class="project-desc">
+          Production-grade, AI-powered self-healing K8s cluster built from scratch using 100% open-source tools across 7 phases. GitHub Actions CI/CD triggers ArgoCD GitOps auto-sync on every merge. Full observability via Prometheus + Grafana + Loki. A FastAPI AI agent powered by <strong>Ollama (Mistral LLM)</strong> reads pod logs and returns structured RCA with severity, fix steps, and prevention tips. A self-healing controller polls every 30s — detects CrashLoopBackOff/OOMKilled, triggers AI analysis, auto-restarts or rolls back deployments, and auto-creates GitHub Issues per incident. Discord ChatOps bot exposes <code>!health</code>, <code>!pods</code>, <code>!analyze</code>, <code>!heal</code> commands.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Kubernetes</span><span class="project-tag">Helm</span>
+          <span class="project-tag">Argo CD</span><span class="project-tag">GitHub Actions</span>
+          <span class="project-tag">Prometheus</span><span class="project-tag">Grafana</span>
+          <span class="project-tag">Loki</span><span class="project-tag">Ollama (Mistral LLM)</span>
+          <span class="project-tag">LangChain</span><span class="project-tag">FastAPI</span>
+          <span class="project-tag">Python</span><span class="project-tag">Discord API</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">🤖 AI-Powered Incident Response Agent</div>
+          <span class="project-badge badge-new">NEW</span>
+        </div>
+        <div class="project-desc">
+          LLM-powered agent reducing P2 incident diagnosis from ~25 min to under 8 min. LangChain + AWS Bedrock ingests Prometheus alerts and ELK log summaries, generates structured RCA drafts and runbook remediation steps, delivered via Slack.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">LangChain</span><span class="project-tag">OpenAI API</span>
+          <span class="project-tag">AWS Bedrock</span><span class="project-tag">Prometheus</span>
+          <span class="project-tag">ELK Stack</span><span class="project-tag">Python</span>
+          <span class="project-tag">Slack API</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">⚙️ Production-Grade CI/CD on AWS EKS</div>
+          <span class="project-badge badge-prod">PROD</span>
+        </div>
+        <div class="project-desc">
+          End-to-end DevSecOps pipeline on AWS EKS with Trivy container scanning as a CI security gate, zero-downtime rolling deployments, real-time cluster metrics, and auto-recovery playbook validation.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Kubernetes</span><span class="project-tag">Jenkins</span>
+          <span class="project-tag">Docker</span><span class="project-tag">Prometheus</span>
+          <span class="project-tag">Grafana</span><span class="project-tag">Trivy</span>
+          <span class="project-tag">AWS EKS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">🐳 CI/CD Pipeline – Node.js App</div>
+        </div>
+        <div class="project-desc">
+          Fully automated CI/CD with multi-stage Dockerfiles reducing image size 60%+. GitHub Actions workflows on PRs and merges, auto-push to GHCR, SSH-based deployment.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">GitHub Actions</span><span class="project-tag">Docker</span>
+          <span class="project-tag">GHCR</span><span class="project-tag">Node.js</span>
+          <span class="project-tag">Nginx</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">🎬 StreamFlix – Cloud Deployment</div>
+        </div>
+        <div class="project-desc">
+          Netflix-style frontend on AWS EC2 with Docker + Nginx reverse proxy. GitHub Actions CI/CD auto-rebuilds on every commit. IAM roles and EC2 user-data for repeatable provisioning.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Docker</span><span class="project-tag">Nginx</span>
+          <span class="project-tag">AWS EC2</span><span class="project-tag">GitHub Actions</span>
+          <span class="project-tag">IAM</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">🔄 GitOps Deployment – Argo CD</div>
+        </div>
+        <div class="project-desc">
+          GitOps-driven Kubernetes workflows with Git as source of truth. Helm charts for versioning and rollback. Declarative cluster state management with automated reconciliation.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Argo CD</span><span class="project-tag">Kubernetes</span>
+          <span class="project-tag">Helm</span><span class="project-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">📊 Monitoring Stack – Prometheus &amp; Grafana</div>
+        </div>
+        <div class="project-desc">
+          Centralised observability stack with Grafana dashboards for CPU, memory, disk I/O, and network. Alertmanager with configurable alerting rules and capacity planning.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Prometheus</span><span class="project-tag">Grafana</span>
+          <span class="project-tag">Node Exporter</span><span class="project-tag">Alertmanager</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">🖥️ Linux Automation – Bash Suite</div>
+        </div>
+        <div class="project-desc">
+          Suite of Bash scripts for server health checks, log rotation, disk alerts, and service auto-restart on failure. Cron and systemd timers for continuous monitoring.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Bash</span><span class="project-tag">Cron</span>
+          <span class="project-tag">Systemd</span><span class="project-tag">Linux</span>
+          <span class="project-tag">RHEL</span><span class="project-tag">Ubuntu</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ EDUCATION & CERTS ══════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">04</span>
+      <h2>Education &amp; Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-certs-grid">
+
+      <div class="edu-item">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-title">B.Tech – Computer Science</div>
+          <div class="edu-sub">Bachelor of Technology</div>
+          <div class="edu-year">2024</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-title">DevOps Master Program</div>
+          <div class="cert-sub">Simplilearn · Linux · Git · Jenkins · Docker · Kubernetes · AWS · Terraform · DevOps Lifecycle</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-icon">📐</div>
+        <div>
+          <div class="edu-title">Diploma in Engineering</div>
+          <div class="edu-sub">Engineering Foundations</div>
+          <div class="edu-year">2021</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">🐙</div>
+        <div>
+          <div class="cert-title">Hands-on Project Portfolio</div>
+          <div class="cert-sub">End-to-end DevOps pipelines, containerisation, IaC, cloud deployments, and AI agent prototypes — <a href="https://github.com/arshitchoubey18" style="color:var(--accent2);text-decoration:none;">github.com/arshitchoubey18</a></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer class="resume-footer">
+    <div class="footer-links">
+      <a href="https://github.com/arshitchoubey18" target="_blank" class="footer-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://arshitchoubey18.github.io/arshit-choubey-portfolio/" target="_blank" class="footer-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
+        Portfolio
+      </a>
+      <a href="mailto:arshitchoubey.devops@gmail.com" class="footer-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        arshitchoubey.devops@gmail.com
+      </a>
+    </div>
+    <div class="footer-note">ARSHIT CHOUBEY · DEVOPS ENGINEER · BANGALORE 2025</div>
+  </footer>
+
+</div>
+</body>
+</html>

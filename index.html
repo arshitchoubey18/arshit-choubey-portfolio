@@ -926,7 +926,7 @@
           <span class="project-badge badge-new">NEW · FEATURED</span>
         </div>
         <div class="project-desc">
-          Production-grade, AI-powered self-healing K8s cluster built from scratch using 100% open-source tools across 7 phases. GitHub Actions CI/CD triggers ArgoCD GitOps auto-sync on every merge. Full observability via Prometheus + Grafana + Loki. A FastAPI AI agent powered by <strong>Ollama (Mistral LLM)</strong> reads pod logs and returns structured RCA with severity, fix steps, and prevention tips. A self-healing controller polls every 30s — detects CrashLoopBackOff/OOMKilled, triggers AI analysis, auto-restarts or rolls back deployments, and auto-creates GitHub Issues per incident. Discord ChatOps bot exposes <code>!health</code>, <code>!pods</code>, <code>!analyze</code>, <code>!heal</code> commands.
+          Production-grade, AI-powered K8s cluster that runs on a 4GB laptop, 100% open-source, local LLM, no cloud API. GitHub Actions builds Docker images to GHCR on every merge, ArgoCD auto-syncs Helm charts with self-heal. Full observability via Prometheus + Grafana + Loki. A FastAPI AI agent powered by <strong>Ollama (qwen2.5:0.5b)</strong> reads pod logs and returns RCA JSON with root_cause, confidence, suggested_fix, and healing_action. A Go-based self-healing controller detects CrashLoopBackOff/OOMKilled, triggers AI analysis, and auto-restarts or rolls back deployments. Discord ChatOps bot exposes <code>!health</code>, <code>!analyze</code>, <code>!heal</code> commands.
         </div>
         <div class="project-tags">
           <span class="project-tag">Kubernetes</span><span class="project-tag">Helm</span>
